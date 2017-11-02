@@ -4,15 +4,109 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.lille1.bermont.appelautreappfinal.MainActivity">
+    tools:context="com.lille1.bermont.appelautreappfinal.MainActivity"
+    tools:layout_editor_absoluteY="81dp"
+    tools:layout_editor_absoluteX="0dp">
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="David AI : Comment puis-je vous aider ?"
+        android:layout_marginStart="28dp"
+        tools:layout_editor_absoluteY="248dp"
+        tools:layout_editor_absoluteX="70dp" />
+
+    <Button
+        android:id="@+id/btn_getContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#673AB7"
+        android:padding="10dp"
+        android:text="Récupérer Contact"
+        android:textColor="@android:color/white"
+        tools:layout_editor_absoluteY="97dp"
+        tools:layout_editor_absoluteX="110dp" />
+
+    <Button
+        android:id="@+id/btn_appeler"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#673AB7"
+        android:padding="10dp"
+        android:text="Appeler"
+        android:textColor="@android:color/white"
+        android:layout_marginStart="42dp"
+        tools:layout_editor_absoluteY="180dp"
+        tools:layout_editor_absoluteX="64dp" />
+
+    <Button
+        android:id="@+id/btn_sms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="42dp"
+        android:background="#673AB7"
+        android:padding="10dp"
+        android:text="Envoyer un SMS"
+        android:textColor="@android:color/white"
+        tools:layout_editor_absoluteX="195dp"
+        tools:layout_editor_absoluteY="180dp" />
+
+    <Button
+        android:id="@+id/btn_explicit_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="#E91E63"
+        android:padding="10dp"
+        android:text="Changer Activité"
+        android:textColor="@android:color/white"
+        android:textSize="8sp"
+        tools:layout_editor_absoluteY="16dp"
+        tools:layout_editor_absoluteX="274dp" />
+
+    <Button
+        android:id="@+id/btn_itineraire"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#3F51B5"
+        android:text="Afficher Itinéraire"
+        android:padding="10dp"
+        android:textColor="@android:color/white"
+        android:layout_marginEnd="16dp"
+        tools:layout_editor_absoluteY="350dp"
+        tools:layout_editor_absoluteX="207dp" />
+
+    <Button
+        android:id="@+id/btn_chooser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#3F51B5"
+        android:padding="10dp"
+        android:text="Envoyez un message !"
+        android:textColor="@android:color/white"
+        android:layout_marginStart="16dp"
+        tools:layout_editor_absoluteY="350dp"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <ImageButton
+        android:id="@+id/btnSpeak"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:padding="16dp"
+        android:scaleType="fitCenter"
+        android:src="@mipmap/ic_micro"
+        tools:layout_editor_absoluteY="398dp"
+        tools:layout_editor_absoluteX="152dp" />
+
+    <TextView
+        android:id="@+id/micro_indication"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dites quelque chose (mais tapez sur le micro avant !)"
+        android:layout_marginEnd="25dp"
+        tools:layout_editor_absoluteY="479dp"
+        tools:layout_editor_absoluteX="31dp" />
 
 </android.support.constraint.ConstraintLayout>

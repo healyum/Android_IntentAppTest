@@ -14,8 +14,17 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="http" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ExplicitActivity"
+            android:label="@string/title_activity_explicit"></activity>
     </application>
 
 </manifest>
