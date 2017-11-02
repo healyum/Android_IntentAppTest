@@ -61,6 +61,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button btn_sms = (Button) findViewById(R.id.btn_sms);
+        btn_sms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                doEnvoyerSms();
+            }
+        });
+
         Button btn_chooser = (Button) findViewById(R.id.btn_chooser);
         btn_chooser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,9 +173,6 @@ public class MainActivity extends AppCompatActivity {
     private void doAppeler() {
 
         Uri number = Uri.parse("tel:"+phoneNumber);
-
-        //Uri number = Uri.parse("tel:123456");
-
         Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
 
         //version 1
@@ -182,6 +187,12 @@ public class MainActivity extends AppCompatActivity {
         if (isIntentSafe) {
             startActivity(callIntent);
         }
+    }
+
+    private void doEnvoyerSms() {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.fromParts("sms", phoneNumber, null));
+        intent.putExtra("sms_body", "Bonjour, comment vas-tu ?");
+        startActivity(intent);
     }
 
     private void appChooser() {
