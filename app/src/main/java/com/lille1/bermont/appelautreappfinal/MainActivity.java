@@ -203,14 +203,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void appChooser() {
-        Intent chooserIntent = new Intent(Intent.ACTION_VIEW);
+        Intent chooserIntent = new Intent(Intent.ACTION_SEND);
         chooserIntent.setType("text/plain");
+        chooserIntent.putExtra(Intent.EXTRA_SUBJECT, "Super message");
+        chooserIntent.putExtra(Intent.EXTRA_TEXT, "Je t'envoie un super message, génial non ?");
 
-        // Always use string resources for UI text.
-        // This says something like "Share this photo with"
-        //tring title = getResources().getString(R.string.msg_a_envoyer);
-        // Create intent to show chooser
-        Intent chooser = Intent.createChooser(chooserIntent, "Envoyez un message à une autre app");
+        // Toujours utiliser une ressource String pour afficher un titre dans l'interface de sélection
+        // Ecrire un texte comme : "Partager à vos amis" en titre
+        String title = getResources().getString(R.string.msg_a_envoyer);
+        // Création d'un intent pour visualiser le chooser
+        Intent chooser = Intent.createChooser(chooserIntent, title);
 
         startActivity(chooser);
     }
@@ -219,5 +221,4 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ExplicitActivity.class);
         startActivity(intent);
     }
-
 }
