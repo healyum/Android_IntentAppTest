@@ -122,8 +122,8 @@ public class MainActivity extends AppCompatActivity {
                 // Retrieve the phone number from the NUMBER column
                 int column = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
                 String number = cursor.getString(column);
+                // stocke le numéro dans la variable privé phoneNumber de la classe
                 phoneNumber = number;
-                Log.d("tag",phoneNumber);
 
                 TextView textView = (TextView) findViewById(R.id.textView);
                 textView.setText("Que voulez-vous faire de ce numéro ? \n" + number);
@@ -136,6 +136,13 @@ public class MainActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK && null != data) {
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     mVoiceInputTv.setText(result.get(0));
+
+                    // Déclenchement des actions selon ce qu'on dit à Dadid dans le micro
+                    if ((result).contains("appeler")) { doAppeler(); }
+                    if ((result).contains("sms") || (result).contains("envoyer sms") || (result).contains("envoyer un sms")) { doEnvoyerSms(); }
+                    if ((result).contains("changer activité") || (result).contains("changer") || (result).contains("activité")) { intentExplicit(); }
+                    if ((result).contains("récupérer contact") || (result).contains("récupérer") || (result).contains("contact") || (result).contains("récupérer un contact")) { pickContact(); }
+                    if ((result).contains("afficher itinéraire") || (result).contains("afficher") || (result).contains("itinéraire")) { doItineraire(); }
                 }
                 break;
             }
