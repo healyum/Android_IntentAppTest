@@ -13,12 +13,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="David AI : Comment puis-je vous aider ?"
-        android:layout_marginStart="6dp"
         tools:layout_constraintTop_creator="1"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/btn_sms"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_chooser"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="96dp"
         tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/btn_appeler" />
+        android:layout_marginBottom="97dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_sms" />
 
     <Button
         android:id="@+id/btn_getContact"
@@ -28,12 +32,12 @@
         android:padding="10dp"
         android:text="Récupérer Contact"
         android:textColor="@android:color/white"
-        tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/btn_sms"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="33dp"
-        app:layout_constraintTop_toBottomOf="@+id/btn_explicit_activity"
         tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="20dp"
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <Button
@@ -42,13 +46,14 @@
         android:layout_height="wrap_content"
         android:background="#673AB7"
         android:padding="10dp"
+        android:minWidth="150dp"
         android:text="Appeler"
         android:textColor="@android:color/white"
-        android:layout_marginStart="64dp"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/btn_getContact"
         tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="20dp"
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <Button
@@ -57,20 +62,24 @@
         android:layout_height="wrap_content"
         android:background="#673AB7"
         android:padding="10dp"
+        android:minWidth="150dp"
         android:text="Envoyer un SMS"
         android:textColor="@android:color/white"
+        android:layout_marginEnd="21dp"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
-        android:layout_marginEnd="52dp"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_itineraire"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="35dp"
-        app:layout_constraintTop_toBottomOf="@+id/btn_getContact" />
+        android:layout_marginTop="163dp"
+        android:layout_marginBottom="162dp"
+        app:layout_constraintTop_toTopOf="@+id/btn_explicit_activity" />
 
     <Button
         android:id="@+id/btn_explicit_activity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="15dp"
+        android:layout_marginEnd="12dp"
         android:background="#E91E63"
         android:padding="10dp"
         android:text="Changer Activité"
@@ -83,32 +92,51 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:id="@+id/btn_coffee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#E91E63"
+        android:padding="10dp"
+        android:text="Faire le café"
+        android:textColor="@android:color/white"
+        android:textSize="8sp"
+        android:layout_marginStart="16dp"
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginTop="16dp"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
         android:id="@+id/btn_itineraire"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="27dp"
         android:background="#3F51B5"
-        android:text="Afficher Itinéraire"
         android:padding="10dp"
+        android:text="Afficher Itinéraire"
         android:textColor="@android:color/white"
-        android:layout_marginEnd="16dp"
+        android:textSize="12sp"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toTopOf="@+id/btnSpeak"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="10dp" />
 
     <Button
         android:id="@+id/btn_chooser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:background="#3F51B5"
         android:padding="10dp"
-        android:text="Envoyez un message !"
+        android:text="Partager un message"
         android:textColor="@android:color/white"
-        android:layout_marginStart="16dp"
+        android:textSize="12sp"
         tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnSpeak"
         tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="113dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <ImageButton
@@ -119,11 +147,12 @@
         android:padding="16dp"
         android:scaleType="fitCenter"
         android:src="@mipmap/ic_micro"
-        tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/micro_indication"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_chooser"
         tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="1dp"
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <TextView
@@ -131,11 +160,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Dites quelque chose (mais tapez sur le micro avant !)"
-        android:layout_marginEnd="24dp"
-        tools:layout_constraintTop_creator="1"
+        android:layout_marginEnd="21dp"
         tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="1dp"
-        app:layout_constraintTop_toBottomOf="@+id/btnSpeak" />
+        android:layout_marginBottom="14dp" />
 
 </android.support.constraint.ConstraintLayout>
