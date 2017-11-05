@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,17 +30,38 @@ public class MainActivity extends AppCompatActivity {
     // Numéro de téléphone d'exemple pour les émulateurs qui n'ont pas de contact dans le répertoire
     private String phoneNumber = "0612345678";
 
+    //scan
+    private Button scanBtn;
+    private TextView formatTxt, contentTxt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Reconnaissance vocale
         mVoiceInputTv = (TextView) findViewById(R.id.micro_indication);
         mSpeakBtn = (ImageButton) findViewById(R.id.btnSpeak);
         mSpeakBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startVoiceInput();
+            }
+        });
+
+        // ZXing lecteur de code barre, QR Code
+        scanBtn = (Button)findViewById(R.id.scan_button);
+        contentTxt = (TextView)findViewById(R.id.scan_content);
+
+       // scanBtn.setOnClickListener((View.OnClickListener) this);
+        Button btn_scan = (Button) findViewById(R.id.scan_button);
+        btn_scan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(view.getId() == R.id.scan_button){
+                    IntentIntegrator scanIntegrator = new IntentIntegrator(MainActivity.this);
+                    scanIntegrator.initiateScan();
+                }
             }
         });
 
@@ -120,8 +142,18 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // Vérifie la requête à laquelle on répond (ici textToSpeech)
+
+        // Cas scan
+        IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        // si résultat du scan positif
+        if (scanResult != null) {
+            String scanContent = scanResult.getContents();
+            contentTxt.setText("Résultat du scan: " + scanContent);
+        }
+
+        // Sélection requête adéquate lorsque l'activité reçoit une réponse
         switch (requestCode) {
+            // Cas Reconnaissance vocale
             case REQ_CODE_SPEECH_INPUT: {
                 if (resultCode == RESULT_OK && null != data) {
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
@@ -138,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             }
+            // Cas choisir un contact
             case PICK_CONTACT_REQUEST:{
                 // Vérifie que la requête a fonctionné
                 if (resultCode == RESULT_OK) {
