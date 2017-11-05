@@ -9,31 +9,17 @@
     tools:layout_editor_absoluteX="0dp">
 
     <TextView
-        android:id="@+id/scan_format"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:textIsSelectable="true"
-        android:layout_marginEnd="9dp"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        app:layout_constraintRight_toRightOf="@+id/btn_coffee"
-        app:layout_constraintTop_toBottomOf="@+id/btn_coffee"
-        android:layout_marginTop="14dp"
-        android:layout_marginRight="12dp" />
-
-    <TextView
         android:id="@+id/scan_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:textIsSelectable="true"
-        android:layout_marginEnd="32dp"
+        android:text=" "
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
-        app:layout_constraintRight_toRightOf="@+id/btn_getContact"
-        android:layout_marginTop="22dp"
-        app:layout_constraintTop_toBottomOf="@+id/scan_button" />
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="14dp"
+        app:layout_constraintTop_toBottomOf="@+id/scan_button"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <TextView
         android:id="@+id/textView"
@@ -43,13 +29,13 @@
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_chooser"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSpeak"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="97dp"
+        android:layout_marginTop="187dp"
+        app:layout_constraintTop_toBottomOf="@+id/scan_content"
         tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="97dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btn_sms" />
+        android:layout_marginBottom="187dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <Button
         android:id="@+id/btn_getContact"
@@ -59,12 +45,13 @@
         android:padding="10dp"
         android:text="Récupérer Contact"
         android:textColor="@android:color/white"
-        android:layout_marginStart="15dp"
         tools:layout_constraintTop_creator="1"
-        android:layout_marginTop="9dp"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="@+id/scan_content"
+        android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@+id/scan_content"
         tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toRightOf="@+id/scan_format" />
+        app:layout_constraintLeft_toRightOf="@+id/scan_content" />
 
     <Button
         android:id="@+id/btn_appeler"
@@ -102,7 +89,7 @@
         android:id="@+id/btn_explicit_activity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="5dp"
         android:background="#E91E63"
         android:padding="10dp"
         android:text="Changer Activité"
@@ -134,16 +121,17 @@
         android:id="@+id/scan_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#E91E63"
+        android:background="#4CAF50"
         android:padding="10dp"
         android:text="Scanner"
         android:textColor="@android:color/white"
         android:textSize="8sp"
-        android:layout_marginEnd="10dp"
-        app:layout_constraintRight_toLeftOf="@+id/scan_content"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="16dp"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -199,11 +187,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Dites quelque chose (mais tapez sur le micro avant !)"
-        android:layout_marginEnd="19dp"
+        android:layout_marginEnd="14dp"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginBottom="12dp" />
+        android:layout_marginBottom="7dp" />
 
 </android.support.constraint.ConstraintLayout>

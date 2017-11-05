@@ -1,20 +1,25 @@
 package com.lille1.bermont.appelautreappfinal;
 
+import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.speech.RecognizerIntent;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.zxing.client.android.CaptureActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,15 +58,29 @@ public class MainActivity extends AppCompatActivity {
         scanBtn = (Button)findViewById(R.id.scan_button);
         contentTxt = (TextView)findViewById(R.id.scan_content);
 
+        // Autorisation de la Caméra à partir d'Android 6+ (obligatoire pour autoriser l'utilisation de la caméra)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 1);
+            }
+        }
+
        // scanBtn.setOnClickListener((View.OnClickListener) this);
         Button btn_scan = (Button) findViewById(R.id.scan_button);
         btn_scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(view.getId() == R.id.scan_button){
+               /* Version appel au package depuis le PlayStore (nécessite installation) */
+               /*
+                    if(view.getId() == R.id.scan_button){
                     IntentIntegrator scanIntegrator = new IntentIntegrator(MainActivity.this);
                     scanIntegrator.initiateScan();
-                }
+                }*/
+               /* Version library ZXing intétrée en standalone */
+                Intent intent = new Intent(getApplicationContext(),CaptureActivity.class);
+                intent.setAction("com.google.zxing.client.android.SCAN");
+                intent.putExtra("SAVE_HISTORY", false);
+                startActivityForResult(intent, 0);
             }
         });
 
@@ -143,16 +162,29 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        // Cas scan
-        IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        // si résultat du scan positif
-        if (scanResult != null) {
-            String scanContent = scanResult.getContents();
-            contentTxt.setText("Résultat du scan: " + scanContent);
-        }
-
         // Sélection requête adéquate lorsque l'activité reçoit une réponse
         switch (requestCode) {
+            /* Cas Scan*/
+            /* Version library ZXing intétrée en standalone */
+            case 0: {
+                if (resultCode == RESULT_OK) {
+                    String contents = data.getStringExtra("SCAN_RESULT");
+                    contentTxt.setText("scan: " + contents);
+                } else if (resultCode == RESULT_CANCELED) {
+                    Toast.makeText(this, "The barcode scanned should be of type UPC", Toast.LENGTH_LONG).show();
+                }
+                break;
+            }
+            /* Version appel au package depuis le PlayStore (nécessite installation) */
+            /*
+            case 0: {
+                IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+                if (scanResult != null) {
+                    String scanContent = scanResult.getContents();
+                    contentTxt.setText("scan: " + scanContent);
+                }
+                break;
+            }*/
             // Cas Reconnaissance vocale
             case REQ_CODE_SPEECH_INPUT: {
                 if (resultCode == RESULT_OK && null != data) {
