@@ -70,17 +70,7 @@ public class MainActivity extends AppCompatActivity {
         btn_scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               /* Version appel au package depuis le PlayStore (nécessite installation) */
-               /*
-                    if(view.getId() == R.id.scan_button){
-                    IntentIntegrator scanIntegrator = new IntentIntegrator(MainActivity.this);
-                    scanIntegrator.initiateScan();
-                }*/
-               /* Version library ZXing intétrée en standalone */
-                Intent intent = new Intent(getApplicationContext(),CaptureActivity.class);
-                intent.setAction("com.google.zxing.client.android.SCAN");
-                intent.putExtra("SAVE_HISTORY", false);
-                startActivityForResult(intent, 0);
+                doDemarrerScan();
             }
         });
 
@@ -153,6 +143,20 @@ public class MainActivity extends AppCompatActivity {
         textView.setText(nomAi+"Tu prends un ou deux sucres ?");
     }
 
+    private void doDemarrerScan() {
+          /* Version appel au package depuis le PlayStore (nécessite installation) */
+               /*
+                    if(view.getId() == R.id.scan_button){
+                    IntentIntegrator scanIntegrator = new IntentIntegrator(MainActivity.this);
+                    scanIntegrator.initiateScan();
+                }*/
+        /* Version library ZXing intétrée en standalone */
+        Intent intent = new Intent(getApplicationContext(),CaptureActivity.class);
+        intent.setAction("com.google.zxing.client.android.SCAN");
+        intent.putExtra("SAVE_HISTORY", false);
+        startActivityForResult(intent, 0);
+    }
+
     private void doChoisirContact() {
         Intent pickContactIntent = new Intent(Intent.ACTION_PICK, Uri.parse("content://contacts"));
         pickContactIntent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE); // Montrer à l'utilisateur uniquement les contacts avec des numéros de téléphone
@@ -161,7 +165,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         // Sélection requête adéquate lorsque l'activité reçoit une réponse
         switch (requestCode) {
             /* Cas Scan*/
@@ -170,8 +173,10 @@ public class MainActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK) {
                     String contents = data.getStringExtra("SCAN_RESULT");
                     contentTxt.setText("scan: " + contents);
+                    TextView textView = (TextView) findViewById(R.id.textView);
+                    textView.setText(nomAi+"Envoyer " + contents + "par sms ?");
                 } else if (resultCode == RESULT_CANCELED) {
-                    Toast.makeText(this, "The barcode scanned should be of type UPC", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Scan annulé", Toast.LENGTH_LONG).show();
                 }
                 break;
             }
@@ -191,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     mVoiceInputTv.setText(result.get(0));
 
-                    // Déclenchement des actions selon ce qu'on dit à Dadid dans le micro
+                    // Déclenchement des actions selon ce qu'on dit à David dans le micro
                     if ((result).contains("faire le café") || (result).contains("café")) { doCafe(); }
                     if ((result).contains("partager un message") || (result).contains("partager")) { doMontrerAppChooser(); }
                     if ((result).contains("appeler")) { doAppeler(); }
@@ -199,6 +204,7 @@ public class MainActivity extends AppCompatActivity {
                     if ((result).contains("changer activité") || (result).contains("changer") || (result).contains("activité")) { doChangerActivite(); }
                     if ((result).contains("récupérer contact") || (result).contains("récupérer") || (result).contains("contact") || (result).contains("récupérer un contact")) { doChoisirContact(); }
                     if ((result).contains("afficher itinéraire") || (result).contains("afficher") || (result).contains("itinéraire")) { doAfficherItineraire(); }
+                    if ((result).contains("scanner")) { doDemarrerScan(); }
                 }
                 break;
             }
