@@ -55,7 +55,6 @@ gradle-app.setting
 *.iml
 
 #ROOT FILES
-build.gradle
 gradle
 gradle.properties
 gradlew
