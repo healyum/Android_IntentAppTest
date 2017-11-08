@@ -70,6 +70,13 @@ public class MainActivity extends AppCompatActivity {
         btn_scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /* Version appel au package depuis le PlayStore (nécessite installation) */
+               /*
+                    if(view.getId() == R.id.scan_button){
+                    IntentIntegrator scanIntegrator = new IntentIntegrator(MainActivity.this);
+                    scanIntegrator.initiateScan();
+                }*/
+                /* Version library ZXing intétrée en standalone */
                 doDemarrerScan();
             }
         });
@@ -144,12 +151,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void doDemarrerScan() {
-          /* Version appel au package depuis le PlayStore (nécessite installation) */
-               /*
-                    if(view.getId() == R.id.scan_button){
-                    IntentIntegrator scanIntegrator = new IntentIntegrator(MainActivity.this);
-                    scanIntegrator.initiateScan();
-                }*/
         /* Version library ZXing intétrée en standalone */
         Intent intent = new Intent(getApplicationContext(),CaptureActivity.class);
         intent.setAction("com.google.zxing.client.android.SCAN");
